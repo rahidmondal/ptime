@@ -4,8 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PTime </title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js" defer></script>
 </head>
 <body>
-    <p>PTime - Simple Clock and Timer Application</p>
+    <h1>PTime - Simple Clock and Timer Application</h1>
+    <div class="editWrapper">
+        <div class="box">
+            <p>Edit Timer</p>
+            <label for="hour">Hour</label>
+            <input type="number" name="hour" id="hour" min="0" max="23">
+            <label for="min">Minutes</label>
+            <input type="number" name="min" id="min" min="0" max="59">
+            <label for="sec">Seconds</label>
+            <input type="number" name="sec" id="sec" min="0" max="59">
+            <button id="save">Save</button>
+
+        </div>
+    </div>
+
+
+    <div class="timerBox">
+        <div class="box">
+            <p id="timer">0:00:00</p>
+            <button id="reset">Reset</button>
+            <button id="trigger">Start</button>
+            <button id="edit">Edit</button>
+
+        </div>
+    </div>
 </body>
 </html>
