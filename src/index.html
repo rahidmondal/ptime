@@ -8,31 +8,34 @@
     <script src="./index.js" defer></script>
 </head>
 <body>
+
+
+
+
+    <div class="container">
     <h1>PTime</h1>
-    <h2>Simple Clock and Timer Application</h2>
-    <div class="editWrapper">
+    <p>Simple Timer Application</p>    
         <div class="box">
-            <p>Edit Timer</p>
-            <label for="hours">hours</label>
-            <input type="number" name="hours" id="hours" min="0" max="23">
-            <label for="minutes">Minutes</label>
-            <input type="number" name="minutes" id="minutes" min="0" max="59">
-            <label for="seconds">Seconds</label>
-            <input type="number" name="seconds" id="seconds" min="0" max="59">
-            <button id="save">Save</button>
-
-        </div>
-    </div>
-
-
-    <div class="timerBox">
-        <div class="box">
-            <p id="timer">0:00:00</p>
+            <p id="timer">00:25:59</p>
             <button id="reset">Reset</button>
             <button id="trigger">Start</button>
             <button id="edit">Edit</button>
-
         </div>
+        <footer class="copyright">
+            <p>Copyright©2024 Rahid Mondal </p>
+            <p>v1.0.0</p>
+        </footer>
+    </div>
+
+    <div class="hidden" id="editWrapper">
+            <p>Edit Timer</p>
+            <label for="hours">Hours</label>
+            <input type="number" name="hours" id="hours" min="0" max="23" value="0">
+            <label for="minutes">Minutes</label>
+            <input type="number" name="minutes" id="minutes" min="0" max="59" value="59">
+            <label for="seconds">Seconds</label>
+            <input type="number" name="seconds" id="seconds" min="0" max="59" value="59">
+            <button id="save">Save</button>
     </div>
 </body>
 </html>
