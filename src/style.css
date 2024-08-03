@@ -1,3 +1,70 @@
-.editWrapper  {
+:root {
+    --primary-bg-color: #240530;
+    --secondary-bg-color: #014738;
+    --container-bg-color: #246A73;
+    --primary-text-color: #FFE8E1;
+    --secondary-text-color: #c7f5c5;
+    --border-color: #dee2e6;
+    --font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: var(--primary-bg-color);
+    font-family: var(--font-family)
+}
+
+.container {
+    background-color: var(--container-bg-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20% auto;
+    width: 50%;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    text-align: center;
+    color: var(--primary-text-color);
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+.box {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.hidden {
     display: none;
 }
+
+#editWrapper {
+    z-index: 1;
+    text-align: center;
+    background-color: var(--container-bg-color);
+    padding: 10px;
+    width: 50%;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: var(--primary-text-color);
+}
+
+#editWrapper input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+
+button {
+    background-color: var(--secondary-bg-color);
+    color: var(--primary-text-color);
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
