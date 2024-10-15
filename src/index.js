@@ -19,9 +19,26 @@ const editWrapper = document.getElementById('editWrapper');
 const alarmSound = new Audio("./Resource/alarmSound1.mp3")
 
 // Functions
-function updateTimerDisplay(){
-    timerText.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+function formatTime(unit){
+    return String(unit).padStart(2,'0');
 }
+
+
+function updateTimerDisplay(){
+    const formattedHours = formatTime(hours);
+    const formattedMinutes = formatTime(minutes);
+    const formattedSeconds = formatTime(seconds);
+
+    const formattedTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+
+    timerText.textContent = formattedTime;
+    document.title = `Ptime | ${formattedTime}`;
+}
+
+
+
+
 
 resetButton.addEventListener("click", () => {
     updateTimerDisplay();
