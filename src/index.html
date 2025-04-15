@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PTime PWA</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+
 </head>
 
 <body>
@@ -15,16 +17,29 @@
   </header>
 
   <main>
-    <div id="timer">00:00:00</div>
+    <div id="timer-container">
+      <div id="timer">00:00:00</div>
 
-    <div class="button-group">
-      <button id="startPauseBtn" onclick="toggleTimer()">Start</button>
-      <button onclick="location.href='edit.html'">Edit Timer</button>
-      <button onclick="resetTimer()">Reset</button>
+      <div class="button-group">
+        <button id="startPauseBtn" onclick="toggleTimer()">Start</button>
+        <button id="editBtn">Edit Timer</button>
+        <button onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+    
+
+    <div id="edit-container">
+        <h1>Edit Timer</h1>
+        <input type="number" id="editHours" placeholder="00" />
+        <input type="number" id="editMinutes" placeholder="00" />
+        <input type="number" id="editSeconds" placeholder="00" />
+        <br />
+        <div class="button-group">
+          <button onclick="saveTime()">Save & Go Back</button>
+        </div>
     </div>
   </main>
 
-  <script src="script.js"></script>
 </body>
 
 
