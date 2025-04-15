@@ -1,3 +1,7 @@
+import { startTimer, pauseTimer, updateEditValue } from "./timer";
+
+
+
 // Timer Area
 const timerDisplay = document.getElementById("timer");
 const toggleButton = document.getElementById("toggle");
