@@ -158,3 +158,6 @@
     background: #666;
   }
   
+  .hidden{
+    display: none;
+  }
