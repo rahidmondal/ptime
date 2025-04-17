@@ -1,0 +1,27 @@
+{   
+    "version": "2.0.0",
+    "name": "Ptime",
+    "short_name": "Ptime",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "landscape",
+    "scope": "/",
+    "description": "A Simple Timer Application.",
+    "background_color": "#140729",
+    "theme_color": "#140729",
+    "icons": [
+      {
+        "src": "/Resource/web-app-manifest-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/Resource/web-app-manifest-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      }
+    ]
+  }
+  
