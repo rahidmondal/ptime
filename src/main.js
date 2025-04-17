@@ -1,4 +1,4 @@
-import { startTimer, pauseTimer, updateEditValue, resetTimer, getCurrentState, isTimerRunning } from "./timer.js";
+import { startTimer, pauseTimer, updateEditValue, resetTimer, getCurrentState, isTimerRunning,loadState } from "./timer.js";
 
 
 
@@ -77,4 +77,8 @@ saveButton.addEventListener('click', () => {
 
 
 
-
+window.addEventListener("load", () => {
+    loadState();
+    updateTimerDisplay();
+});
+  

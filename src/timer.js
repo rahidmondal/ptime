@@ -34,6 +34,7 @@ export function startTimer(updateTimer) {
       else {
         timerState.seconds--;
       }
+      localStorage.setItem("timerState", JSON.stringify({ ...timerState, intervalId: null }));
       updateTimer();
     }
   }, 1000)
@@ -64,6 +65,7 @@ export function updateEditValue(hours, minutes, seconds, updateTimer) {
   editState.minutes = minutes;
   editState.seconds = seconds;
   editState.intervalId = null;
+  localStorage.setItem("editState", JSON.stringify(editState));
   resetTimer(updateTimer);
 }
 
@@ -73,4 +75,28 @@ export function getCurrentState() {
 
 export function isTimerRunning() {
   return timerState.intervalId !== null;
+}
+
+
+// Sync and Local Storage 
+
+export function loadState() {
+  const savedTimer = localStorage.getItem("timerState");
+  const savedEdit = localStorage.getItem("editState");
+
+  if (savedTimer) {
+    const parsedTimer = JSON.parse(savedTimer);
+    timerState.hours = parsedTimer.hours;
+    timerState.minutes = parsedTimer.minutes;
+    timerState.seconds = parsedTimer.seconds;
+    timerState.intervalId = null;
+  }
+
+  if (savedEdit) {
+    const parsedEdit = JSON.parse(savedEdit);
+    editState.hours = parsedEdit.hours;
+    editState.minutes = parsedEdit.minutes;
+    editState.seconds = parsedEdit.seconds;
+    editState.intervalId = null;
+  }
 }
