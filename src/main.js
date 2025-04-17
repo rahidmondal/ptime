@@ -1,4 +1,4 @@
-import { startTimer, pauseTimer, updateEditValue } from "./timer";
+import { startTimer, pauseTimer, updateEditValue, resetTimer, getCurrentState , isTimerRunning } from "./timer.js";
 
 
 
@@ -13,14 +13,26 @@ const editContainer = document.getElementById("edit-container");
 const saveButton = document.getElementById("save");
 
 
+
+
 // Event Handlers Timer Area
 toggleButton.addEventListener("click",()=>{
-    console.log(toggleButton);
+    if(isTimerRunning()){
+        pauseTimer(updateTimerDisplay);
+        toggleButton.textContent = "Start";
+    }else{
+        startTimer(updateTimerDisplay);
+        toggleButton.textContent = "Pause";
+    }
+
 })
 
 
 resetButton.addEventListener("click",()=>{
     console.log(resetButton);
+    resetTimer(updateTimerDisplay);
+    toggleButton.textContent = "Start";
+
 })
 
 editButton.addEventListener("click",()=>{
@@ -28,9 +40,34 @@ editButton.addEventListener("click",()=>{
 
 })
 
+function formatTime(unit) {
+    return String(unit).padStart(2, "0");
+  }
+
+
+function updateTimerDisplay() {
+    const timerState = getCurrentState();
+
+    const formattedHours = formatTime(timerState.hours);
+    const formattedMinutes = formatTime(timerState.minutes);
+    const formattedSeconds = formatTime(timerState.seconds);
+    
+    const formattedTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    timerDisplay.textContent = formattedTime;
+}
 
 
 // Event Handlers Edit Area
 saveButton.addEventListener("click",()=>{
     editContainer.classList.toggle("hidden");
+    const hours = parseInt( document.getElementById("editHours").value);
+    const minutes = parseInt(document.getElementById("editMinutes").value);
+    const seconds = parseInt(document.getElementById("editSeconds").value);
+    updateEditValue(hours,minutes,seconds,updateTimerDisplay);
+    updateTimerDisplay();
+    toggleButton.textContent = "Start";
 })
+
+
+
+
