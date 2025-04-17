@@ -54,6 +54,7 @@ function updateTimerDisplay() {
 
     const formattedTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
     timerDisplay.textContent = formattedTime;
+
 }
 
 
@@ -69,6 +70,7 @@ saveButton.addEventListener('click', () => {
 
     updateEditValue(validHours, validMinutes, validSeconds, updateTimerDisplay);
     updateTimerDisplay();
+    editContainer.classList.toggle("hidden");
     toggleButton.textContent = "Start";
 });
 

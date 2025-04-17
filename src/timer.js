@@ -1,13 +1,13 @@
 let timerState = {
   hours: 0,
-  minutes: 55,
+  minutes: 59,
   seconds: 59,
   intervalId: null,
 };
 
 let editState = {
   hours: 0,
-  minutes: 55,
+  minutes: 59,
   seconds: 59,
   intervalId: null,
 };
