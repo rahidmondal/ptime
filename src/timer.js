@@ -12,6 +12,7 @@ let editState = {
   intervalId: null,
 };
 
+const toggleButton = document.getElementById("toggle"); // Ad Hoc Fix 
 
 export function startTimer(updateTimer) {
   if (timerState.intervalId !== null) return;
@@ -19,6 +20,7 @@ export function startTimer(updateTimer) {
   timerState.intervalId = setInterval(() => {
     if (timerState.hours === 0 && timerState.minutes === 0 && timerState.seconds === 0) {
       pauseTimer(updateTimer);
+      toggleButton.textContent = "Start"; // Ad Hoc Fix
     } else {
       if (timerState.seconds === 0) {
         timerState.seconds = 59;
