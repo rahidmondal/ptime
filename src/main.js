@@ -60,9 +60,9 @@ function updateTimerDisplay() {
 // Event Handlers Edit Area
 saveButton.addEventListener("click",()=>{
     editContainer.classList.toggle("hidden");
-    const hours = parseInt( document.getElementById("editHours").value);
-    const minutes = parseInt(document.getElementById("editMinutes").value);
-    const seconds = parseInt(document.getElementById("editSeconds").value);
+    const hours = parseInt( document.getElementById("editHours").value) || 0;
+    const minutes = parseInt(document.getElementById("editMinutes").value) || 0;
+    const seconds = parseInt(document.getElementById("editSeconds").value) || 0;
     updateEditValue(hours,minutes,seconds,updateTimerDisplay);
     updateTimerDisplay();
     toggleButton.textContent = "Start";
