@@ -58,15 +58,20 @@ function updateTimerDisplay() {
 
 
 // Event Handlers Edit Area
-saveButton.addEventListener("click",()=>{
-    editContainer.classList.toggle("hidden");
-    const hours = parseInt( document.getElementById("editHours").value) || 0;
-    const minutes = parseInt(document.getElementById("editMinutes").value) || 0;
-    const seconds = parseInt(document.getElementById("editSeconds").value) || 0;
-    updateEditValue(hours,minutes,seconds,updateTimerDisplay);
+saveButton.addEventListener('click', () => {
+    const hours = parseInt(editHours.value);
+    const minutes = parseInt(editMinutes.value);
+    const seconds = parseInt(editSeconds.value);
+  
+    const validHours = hours || 0; // No Limit on Hours 
+    const validMinutes = Math.min(minutes, 59) || 0;
+    const validSeconds = Math.min(seconds, 59) || 0;
+  
+    updateEditValue(validHours, validMinutes, validSeconds, updateTimerDisplay);
     updateTimerDisplay();
     toggleButton.textContent = "Start";
-})
+  });
+  
 
 
 
