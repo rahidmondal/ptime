@@ -1,4 +1,4 @@
-import { startTimer, pauseTimer, updateEditValue, resetTimer, getCurrentState , isTimerRunning } from "./timer.js";
+import { startTimer, pauseTimer, updateEditValue, resetTimer, getCurrentState, isTimerRunning } from "./timer.js";
 
 
 
@@ -16,11 +16,11 @@ const saveButton = document.getElementById("save");
 
 
 // Event Handlers Timer Area
-toggleButton.addEventListener("click",()=>{
-    if(isTimerRunning()){
+toggleButton.addEventListener("click", () => {
+    if (isTimerRunning()) {
         pauseTimer(updateTimerDisplay);
         toggleButton.textContent = "Start";
-    }else{
+    } else {
         startTimer(updateTimerDisplay);
         toggleButton.textContent = "Pause";
     }
@@ -28,21 +28,21 @@ toggleButton.addEventListener("click",()=>{
 })
 
 
-resetButton.addEventListener("click",()=>{
+resetButton.addEventListener("click", () => {
     console.log(resetButton);
     resetTimer(updateTimerDisplay);
     toggleButton.textContent = "Start";
 
 })
 
-editButton.addEventListener("click",()=>{
+editButton.addEventListener("click", () => {
     editContainer.classList.toggle("hidden");
 
 })
 
 function formatTime(unit) {
     return String(unit).padStart(2, "0");
-  }
+}
 
 
 function updateTimerDisplay() {
@@ -51,7 +51,7 @@ function updateTimerDisplay() {
     const formattedHours = formatTime(timerState.hours);
     const formattedMinutes = formatTime(timerState.minutes);
     const formattedSeconds = formatTime(timerState.seconds);
-    
+
     const formattedTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
     timerDisplay.textContent = formattedTime;
 }
@@ -62,16 +62,16 @@ saveButton.addEventListener('click', () => {
     const hours = parseInt(editHours.value);
     const minutes = parseInt(editMinutes.value);
     const seconds = parseInt(editSeconds.value);
-  
+
     const validHours = hours || 0; // No Limit on Hours 
     const validMinutes = Math.min(minutes, 59) || 0;
     const validSeconds = Math.min(seconds, 59) || 0;
-  
+
     updateEditValue(validHours, validMinutes, validSeconds, updateTimerDisplay);
     updateTimerDisplay();
     toggleButton.textContent = "Start";
-  });
-  
+});
+
 
 
 

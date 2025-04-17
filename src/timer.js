@@ -13,40 +13,40 @@ let editState = {
 };
 
 
-export function startTimer(updateTimer){
+export function startTimer(updateTimer) {
   if (timerState.intervalId !== null) return;
-console.log("Timer Started");
-timerState.intervalId = setInterval(()=>{
-  if(timerState.hours === 0 && timerState.minutes === 0 && timerState.seconds === 0){
+  console.log("Timer Started");
+  timerState.intervalId = setInterval(() => {
+    if (timerState.hours === 0 && timerState.minutes === 0 && timerState.seconds === 0) {
       pauseTimer(updateTimer);
-  }else{
-      if(timerState.seconds === 0 ){
-          timerState.seconds = 59;
-          if(timerState.minutes === 0){
-              timerState.minutes = 59;
-              timerState.hours--;
-          }else{
-              timerState.minutes--;
-          }
+    } else {
+      if (timerState.seconds === 0) {
+        timerState.seconds = 59;
+        if (timerState.minutes === 0) {
+          timerState.minutes = 59;
+          timerState.hours--;
+        } else {
+          timerState.minutes--;
+        }
       }
-      else{
-          timerState.seconds--;
+      else {
+        timerState.seconds--;
       }
       updateTimer();
-  }
-},1000)
+    }
+  }, 1000)
 }
 
-export function pauseTimer(updateTimer){
-console.log("Timer Paused");
-clearInterval(timerState.intervalId);
-timerState.intervalId = null;
-updateTimer();
+export function pauseTimer(updateTimer) {
+  console.log("Timer Paused");
+  clearInterval(timerState.intervalId);
+  timerState.intervalId = null;
+  updateTimer();
 
 }
 
 
-export function resetTimer(updateTimer){
+export function resetTimer(updateTimer) {
   console.log("Reset Timer Called");
   pauseTimer(updateTimer);
   timerState.hours = editState.hours;
@@ -56,7 +56,7 @@ export function resetTimer(updateTimer){
 
 }
 
-export function updateEditValue(hours,minutes,seconds,updateTimer){
+export function updateEditValue(hours, minutes, seconds, updateTimer) {
   console.log("Update Edit Value Called");
   editState.hours = hours;
   editState.minutes = minutes;
@@ -65,8 +65,8 @@ export function updateEditValue(hours,minutes,seconds,updateTimer){
   resetTimer(updateTimer);
 }
 
-export function getCurrentState(){
-return  timerState;
+export function getCurrentState() {
+  return timerState;
 }
 
 export function isTimerRunning() {
