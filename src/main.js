@@ -7,6 +7,9 @@ const timerDisplay = document.getElementById("timer");
 const toggleButton = document.getElementById("toggle");
 const editButton = document.getElementById("edit");
 const resetButton = document.getElementById("reset");
+const timerContainer = document.getElementById("timer-container");
+
+
 
 // Edit Area
 const editContainer = document.getElementById("edit-container");
@@ -36,6 +39,7 @@ resetButton.addEventListener("click", () => {
 })
 
 editButton.addEventListener("click", () => {
+    timerContainer.classList.toggle("hidden");
     editContainer.classList.toggle("hidden");
 
 })
@@ -71,6 +75,7 @@ saveButton.addEventListener('click', () => {
     updateEditValue(validHours, validMinutes, validSeconds, updateTimerDisplay);
     updateTimerDisplay();
     editContainer.classList.toggle("hidden");
+    timerContainer.classList.toggle("hidden");
     toggleButton.textContent = "Start";
 });
 
@@ -82,15 +87,15 @@ window.addEventListener("load", () => {
     updateTimerDisplay();
 });
 
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker
-            .register('./serviceWorker.js')
-            .then((registration) => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch((error) => {
-                console.error('Service Worker registration failed:', error);
-            });
-    });
-}
+// if ('serviceWorker' in navigator) {
+//     window.addEventListener('load', () => {
+//         navigator.serviceWorker
+//             .register('./serviceWorker.js')
+//             .then((registration) => {
+//                 console.log('Service Worker registered with scope:', registration.scope);
+//             })
+//             .catch((error) => {
+//                 console.error('Service Worker registration failed:', error);
+//             });
+//     });
+// }
