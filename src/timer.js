@@ -55,6 +55,7 @@ export function resetTimer(updateTimer) {
   timerState.hours = editState.hours;
   timerState.minutes = editState.minutes;
   timerState.seconds = editState.seconds;
+  localStorage.setItem("timerState", JSON.stringify({ ...timerState, intervalId: null }));
   updateTimer();
 
 }
