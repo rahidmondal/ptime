@@ -2,13 +2,17 @@ const CACHE_NAME = 'app-cache-v1';
 const DYNAMIC_CACHE = 'dynamic-cache-v1';
 
 const FILES_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/main.js',
-  '/style.css',
-  '/time.js',
+  './index.html',
+  './main.js',
+  './style.css',
+  './timer.js',
+  './Resource/favicon-96x96.png',
+  './Resource/favicon.svg',
+  './Resource/favicon.ico',
+  './Resource/apple-touch-icon.png',
+  './Resource/web-app-manifest-192x192.png',
+  './Resource/web-app-manifest-512x512.png',
 ];
-
 // Install Event
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -46,6 +50,10 @@ self.addEventListener('fetch', (event) => {
           });
         })
         .catch(() => {
+          // Fallback for offline
+          if (event.request.destination === 'document') {
+            return caches.match('./index.html');
+          }
         });
     })
   );
