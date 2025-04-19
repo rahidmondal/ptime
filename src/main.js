@@ -61,7 +61,17 @@ function updateTimerDisplay() {
 
 }
 
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
 
+updateTimerDisplay();
 // Event Handlers Edit Area
 saveButton.addEventListener('click', () => {
     const hours = parseInt(editHours.value);
