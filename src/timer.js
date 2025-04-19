@@ -12,11 +12,10 @@ let editState = {
   intervalId: null,
 };
 
-const toggleButton = document.getElementById("toggle"); // Ad Hoc Fix 
+const toggleButton = document.getElementById("toggle");
 
 export function startTimer(updateTimer) {
   if (timerState.intervalId !== null) return;
-  console.log("Timer Started");
   timerState.intervalId = setInterval(() => {
     if (timerState.hours === 0 && timerState.minutes === 0 && timerState.seconds === 0) {
       pauseTimer(updateTimer);
@@ -41,7 +40,6 @@ export function startTimer(updateTimer) {
 }
 
 export function pauseTimer(updateTimer) {
-  console.log("Timer Paused");
   clearInterval(timerState.intervalId);
   timerState.intervalId = null;
   updateTimer();
@@ -50,7 +48,6 @@ export function pauseTimer(updateTimer) {
 
 
 export function resetTimer(updateTimer) {
-  console.log("Reset Timer Called");
   pauseTimer(updateTimer);
   timerState.hours = editState.hours;
   timerState.minutes = editState.minutes;
@@ -61,7 +58,6 @@ export function resetTimer(updateTimer) {
 }
 
 export function updateEditValue(hours, minutes, seconds, updateTimer) {
-  console.log("Update Edit Value Called");
   editState.hours = hours;
   editState.minutes = minutes;
   editState.seconds = seconds;
