@@ -37,7 +37,6 @@ toggleButton.addEventListener("click", () => {
 
 
 resetButton.addEventListener("click", () => {
-    console.log(resetButton);
     resetTimer(updateTimerDisplay);
     toggleButton.textContent = "Start";
 
@@ -83,9 +82,11 @@ saveButton.addEventListener('click', () => {
     const minutes = parseInt(editMinutes.value);
     const seconds = parseInt(editSeconds.value);
 
-    const validHours = hours || 0; // No Limit on Hours 
-    const validMinutes = Math.min(minutes, 59) || 0;
-    const validSeconds = Math.min(seconds, 59) || 0;
+    const validHours = hours >= 0 ? hours : 0;
+    const validMinutes = minutes >= 0 ? Math.min(minutes, 59) : 0;
+    const validSeconds = seconds >= 0 ? Math.min(seconds, 59) : 0;
+    
+
 
     updateEditValue(validHours, validMinutes, validSeconds, updateTimerDisplay);
     updateTimerDisplay();

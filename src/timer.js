@@ -19,7 +19,7 @@ export function startTimer(updateTimer) {
   timerState.intervalId = setInterval(() => {
     if (timerState.hours === 0 && timerState.minutes === 0 && timerState.seconds === 0) {
       pauseTimer(updateTimer);
-      toggleButton.textContent = "Start"; // Ad Hoc Fix
+      toggleButton.textContent = "Start"; 
     } else {
       if (timerState.seconds === 0) {
         timerState.seconds = 59;
