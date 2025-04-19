@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PTime </title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./index.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PTime PWA</title>
+  <meta name="description" content="Ptime - A simple and efficient timer application with offline support." />
+  <meta name="keywords" content="timer, countdown, stopwatch, PWA, offline" />
+
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="main.js" type="module"></script>
+
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#140729" />
+  
+  <link rel="icon" type="image/png" href="./Resource/logo192.png" sizes="192x192" />
+  <meta name="apple-mobile-web-app-title" content="Ptime" />
+
+
+
 </head>
+
 <body>
+  <header>
+    <div class="logo">PTime</div>
+    <button id="fullscreen" >⛶</button>
+  </header>
 
+  <main>
+    <div id="timer-container"  class="">
+      <div id="timer">00:59:59</div>
 
-
-
-    <div class="container">
-    <h1>PTime</h1>
-    <p>Simple Timer Application</p>    
-        <div class="box">
-            <p id="timer">00:25:59</p>
-            <button id="reset">Reset</button>
-            <button id="trigger">Start</button>
-            <button id="edit">Edit</button>
-        </div>
-        <footer class="copyright">
-            <p>Copyright©2024 Rahid Mondal </p>
-            <p>v1.0.0</p>
-        </footer>
+      <div class="button-group">
+        <button id="toggle">Start</button>
+        <button id="edit">Edit Timer</button>
+        <button id="reset">Reset</button>
+      </div>
     </div>
 
-    <div class="hidden" id="editWrapper">
-            <p>Edit Timer</p>
-            <label for="hours">Hours</label>
-            <input type="number" name="hours" id="hours" min="0" max="23" value="0">
-            <label for="minutes">Minutes</label>
-            <input type="number" name="minutes" id="minutes" min="0" max="59" value="59">
-            <label for="seconds">Seconds</label>
-            <input type="number" name="seconds" id="seconds" min="0" max="59" value="59">
-            <button id="save">Save</button>
+
+    <div id="edit-container" class="hidden">
+      <h1>Edit Timer</h1>
+      <input type="number" id="editHours" placeholder="00" value="00" max="23" min="0"/>
+      <input type="number" id="editMinutes" placeholder="59" value="59" max="59" min="0" />
+      <input type="number" id="editSeconds" placeholder="59" value="59" max="59" min="0" />
+      <br />
+      <div class="button-group">
+        <button id="save">Save</button>
+      </div>
     </div>
+  </main>
+
 </body>
+
+
 </html>
