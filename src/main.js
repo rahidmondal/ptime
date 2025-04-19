@@ -8,7 +8,7 @@ const toggleButton = document.getElementById("toggle");
 const editButton = document.getElementById("edit");
 const resetButton = document.getElementById("reset");
 const timerContainer = document.getElementById("timer-container");
-
+const toggleFullscreenButton = document.getElementById("fullscreen");
 
 
 // Edit Area
@@ -17,6 +17,11 @@ const saveButton = document.getElementById("save");
 
 
 
+
+// Full Screen
+toggleFullscreenButton.addEventListener("click",()=>{
+    toggleFullscreen();
+})
 
 // Event Handlers Timer Area
 toggleButton.addEventListener("click", () => {
