@@ -6,12 +6,11 @@ const FILES_TO_CACHE = [
   './main.js',
   './style.css',
   './timer.js',
-  './Resource/favicon-96x96.png',
-  './Resource/favicon.svg',
-  './Resource/favicon.ico',
-  './Resource/apple-touch-icon.png',
-  './Resource/web-app-manifest-192x192.png',
-  './Resource/web-app-manifest-512x512.png',
+  './Resource/Desktop_SS.png',
+  './Resource/logo192.png',
+  './Resource/logo512.png',
+  './Resource/Mobile_SS.png'
+  
 ];
 // Install Event
 self.addEventListener('install', (event) => {
