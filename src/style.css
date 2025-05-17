@@ -1,172 +1,319 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;  
-    background: linear-gradient(to bottom right, #140729, #271f03bf); 
-    color: #fff;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  header {
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #111;
-  }
-  
-  .logo {
-    font-family: sans-serif;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #fff;
-  }
-  
-  #fullscreen {
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #140729, #271f03bf);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #111; 
+}
+
+.logo {
+  font-family: sans-serif; 
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+}
+
+#fullscreen {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; 
+}
+
+#timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#timer {
+  font-size: 15vw;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.3s ease;
+  color: #e0e0e0;
+  margin-bottom: 20px; 
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.controls input {
+  width: 60px;
+  padding: 10px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #2d1c4a;
+  color: white;
+}
+
+.controls button {
+  padding: 10px 15px;
+  font-size: 1.1em;
+  background: #3c2a60; 
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.controls button:hover {
+  background: #504270; 
+}
+
+body.alarm {
+  background: #ff4444; 
+}
+
+.button-group {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; 
+  flex-wrap: wrap; 
+}
+
+.button-group button {
+  padding: 12px 20px;
+  font-size: 1.1em;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  background: #271946;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-width: 100px; 
+}
+
+.button-group button:hover {
+  background-color: #504270; 
+}
+
+#edit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 450px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #1c0e33;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+}
+
+#timer-container.hidden,
+#edit-container.hidden {
+  display: none;
+}
+
+.edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+#edit-container h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin: 0;
+  color: #f0f0f0;
+  text-align: center;
+}
+
+#edit-container button#backFromEdit {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #b0a0d0;
+  padding: 8px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#edit-container button#backFromEdit:hover {
+  color: #ffffff;
+}
+
+#edit-container button#backFromEdit svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
+.edit-inputs-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#edit-container input[type="number"] {
+  flex: 1;
+  min-width: 60px;
+  max-width: 100px;
+  padding: 12px;
+  font-size: 1.2em;
+  text-align: center;
+  border: 1px solid #3a2c5a;
+  border-radius: 8px;
+  background-color: #2d1c4a;
+  color: #ffffff;
+  box-sizing: border-box;
+  -moz-appearance: textfield; 
+}
+
+#edit-container input[type="number"]::-webkit-outer-spin-button,
+#edit-container input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#edit-container input[type="number"]:focus {
+  outline: none;
+  border-color: #7b68ee;
+  box-shadow: 0 0 0 2px rgba(123, 104, 238, 0.3);
+}
+
+#edit-container br { 
+  display: none;
+}
+
+#edit-container button#save {
+  padding: 12px 30px;
+  font-size: 1.1em;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  background-color: #3c2a60;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 20px;
+  width: 60%;
+  max-width: 200px;
+}
+
+#edit-container button#save:hover {
+  background-color: #504270;
+}
+
+@media (max-width: 768px) {
   #timer {
-    font-size: 15vw;
-    font-weight: bold;
-    text-align: center;
-    transition: all 0.3s ease;
+    font-size: 20vw; 
   }
-  
-  .controls {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
+}
+
+@media (max-width: 500px) {
+  body {
+    min-height: -webkit-fill-available; 
   }
-  
-  .controls input {
-    width: 60px;
-    padding: 10px;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
+  header {
+    padding: 0 15px;
   }
-  
-  .controls button {
-    padding: 10px 15px;
-    font-size: 1.1em;
-    background: #333;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s;
+  .logo {
+    font-size: 1.3em;
   }
-  
-  .controls button:hover {
-    background: #555;
+  #timer {
+    font-size: 25vw; 
   }
-  
-  body.alarm {
-    background: #ff4444;
-  }
-  
   .button-group {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column; 
+    align-items: center;
+    gap: 12px;
   }
-  
   .button-group button {
-    padding: 12px 20px;
-    font-size: 1.1em;
-    border: none;
-    border-radius: 8px;
-    background: #1c0e33cf;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    width: 80%;
+    max-width: 300px; 
+    padding: 15px; 
   }
-  
-  .button-group button:hover {
-    background-color: #372e4f;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
+
   #edit-container {
-    margin-top: 20px;
-    background: #1c0e33;
-    padding: 1rem;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 500px;
-    box-sizing: border-box;
+    padding: 20px;
+    width: 95%;
   }
 
-  #edit-container input {
-    width: 100%;
-    max-width: 100px;
-    padding: 12px;
-    margin: 10px;
-    font-size: 1.2em;
-    text-align: center;
-    border: none;
-    border-radius: 8px;
-    background: #2d1c4a;
-    color: white;
+  .edit-header {
+    margin-bottom: 20px;
   }
 
-  #edit-container .button-group button {
-    padding: 12px 20px;
+  #edit-container h1 {
+    font-size: 1.6em;
+  }
+
+  #edit-container button#backFromEdit {
+    left: -5px;
+    padding: 6px;
+  }
+  
+  #edit-container button#backFromEdit svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .edit-inputs-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  #edit-container input[type="number"] {
+    width: 80%;
+    max-width: 180px; 
+    font-size: 1.1em;
+    padding: 10px;
+  }
+
+  #edit-container button#save {
+    width: 80%;
+    max-width: 300px;
+    padding: 14px;
     font-size: 1em;
-    border-radius: 8px;
-    border: none;
-    background-color: #3c2a60;
-    color: #fff;
-    cursor: pointer; /* ✅ Fixes interaction issue */
-    transition: background-color 0.2s ease;
   }
-
-  @media (max-width: 500px) {
-    #edit-container {
-      padding: 1.2rem;
-    }
-  
-    #edit-container input {
-      width: 80%;
-      max-width: none;
-      font-size: 1em;
-    }
-  
-    .button-group {
-      flex-direction: column;
-      gap: 10px;
-    }
-  
-    .button-group button {
-      width: 100%;
-    }
-  }
-  
+}
