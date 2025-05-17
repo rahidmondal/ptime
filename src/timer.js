@@ -162,3 +162,7 @@ export function loadState() {
     timerState.pausedElapsed = 0;
   }
 }
+
+export function getEditState() {
+  return { ...editState };
+}

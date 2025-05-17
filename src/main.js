@@ -1,4 +1,4 @@
-import { startTimer, pauseTimer, updateEditValue, resetTimer, getCurrentState, isTimerRunning, loadState } from "./timer.js";
+import { startTimer, pauseTimer, updateEditValue, resetTimer, getEditState, getCurrentState, isTimerRunning, loadState } from "./timer.js";
 
 
 
@@ -11,9 +11,17 @@ const timerContainer = document.getElementById("timer-container");
 const toggleFullscreenButton = document.getElementById("fullscreen");
 
 
+
+
 // Edit Area
 const editContainer = document.getElementById("edit-container");
 const saveButton = document.getElementById("save");
+const editHoursInput = document.getElementById("editHours");
+const editMinutesInput = document.getElementById("editMinutes");
+const editSecondsInput = document.getElementById("editSeconds");
+const backFromEditButton = document.getElementById("backFromEdit");
+
+
 
 
 
@@ -43,10 +51,18 @@ resetButton.addEventListener("click", () => {
 })
 
 editButton.addEventListener("click", () => {
+    updateEditInputFields();
     timerContainer.classList.toggle("hidden");
     editContainer.classList.toggle("hidden");
 
 })
+
+backFromEditButton.addEventListener("click", () => {
+    editContainer.classList.add("hidden");
+    timerContainer.classList.remove("hidden");
+    updateEditInputFields(); 
+});
+
 
 function formatTime(unit) {
     return String(unit).padStart(2, "0");
@@ -95,12 +111,18 @@ saveButton.addEventListener('click', () => {
     toggleButton.textContent = "Start";
 });
 
-
+function updateEditInputFields() {
+    const currentEditState = getEditState(); 
+    editHoursInput.value = formatTime(currentEditState.hours);
+    editMinutesInput.value = formatTime(currentEditState.minutes);
+    editSecondsInput.value = formatTime(currentEditState.seconds);
+}
 
 
 window.addEventListener("load", () => {
     loadState();
     updateTimerDisplay();
+    updateEditInputFields();
 });
 
 if ('serviceWorker' in navigator) {
@@ -115,3 +137,5 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+
