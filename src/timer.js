@@ -52,6 +52,13 @@ export function startTimer(updateTimer) {
       timerState.hours = 0;
       timerState.minutes = 0;
       timerState.seconds = 0;
+
+      const sound = document.getElementById("alarm");  
+      if (sound) { 
+        sound.currentTime = 0;
+        sound.play();
+      }
+      
       pauseTimer(updateTimer); 
       if(toggleButton) toggleButton.textContent = "Start";
       localStorage.setItem("timerState", JSON.stringify({

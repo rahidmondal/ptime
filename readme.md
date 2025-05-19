@@ -36,3 +36,7 @@ Once installed, you can launch PTime from your device's home screen or app drawe
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE).
+
+## Credits
+
+See the Credits of PTime in the [CREDITS](CREDITS.md).
