@@ -10,6 +10,7 @@ const FILES_TO_CACHE = [
   './Resource/logo192.png',
   './Resource/logo512.png',
   './Resource/Mobile_SS.png',
+  './Resource/alarm.mp3'
 ];
 
 const handleInstall = async () => {
