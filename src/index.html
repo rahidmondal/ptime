@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>PTime PWA</title>
   <meta name="description" content="Ptime - A simple and efficient timer application with offline support." />
   <meta name="keywords" content="timer, countdown, stopwatch, PWA, offline" />
@@ -23,9 +23,13 @@
 </head>
 
 <body>
+  <div id="header-detector"></div>
   <header>
-    <div class="logo">PTime</div>
-    <button id="fullscreen" >⛶</button>
+    <div class="logo">
+      <img src="./Resource/logo192.png" class="logo-img" alt="PTime Logo">
+      <span class="logo-text">PTime</span>
+    </div>
+    <button id="fullscreen">⛶</button>
   </header>
 
   <main>
