@@ -56,7 +56,9 @@ export function startTimer(updateTimer) {
       const sound = document.getElementById("alarm");  
       if (sound) { 
         sound.currentTime = 0;
-        sound.play();
+        sound.play().catch((error) => {
+          console.error("Failed to play alarm sound:", error);
+        });
       }
       
       pauseTimer(updateTimer); 
