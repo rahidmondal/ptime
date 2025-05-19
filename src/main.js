@@ -81,13 +81,62 @@ function updateTimerDisplay() {
 
 }
 
+// Replace your existing toggleFullscreen function with this:
 function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
+    // Get the document element
+    const doc = document.documentElement;
+    
+    // Check if currently in fullscreen
+    const isFullscreen = 
+        document.fullscreenElement || 
+        document.webkitFullscreenElement || 
+        document.mozFullScreenElement || 
+        document.msFullscreenElement;
+    
+    // Toggle fullscreen
+    if (!isFullscreen) {
+        // Request fullscreen with browser prefixes for compatibility
+        if (doc.requestFullscreen) {
+            doc.requestFullscreen();
+        } else if (doc.webkitRequestFullscreen) { /* Safari */
+            doc.webkitRequestFullscreen();
+        } else if (doc.msRequestFullscreen) { /* IE11 */
+            doc.msRequestFullscreen();
+        } else if (doc.mozRequestFullScreen) { /* Firefox */
+            doc.mozRequestFullScreen();
+        }
     } else {
+        // Exit fullscreen with browser prefixes for compatibility
         if (document.exitFullscreen) {
             document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
         }
+    }
+}
+
+// Update fullscreen change event listener to handle vendor prefixes
+document.addEventListener('fullscreenchange', handleFullscreenChange);
+document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+// Function to handle fullscreen change
+function handleFullscreenChange() {
+    const isFullscreen = 
+        document.fullscreenElement || 
+        document.webkitFullscreenElement || 
+        document.mozFullScreenElement || 
+        document.msFullscreenElement;
+    
+    if (isFullscreen) {
+        document.body.classList.add('fullscreen');
+    } else {
+        document.body.classList.remove('fullscreen');
     }
 }
 
@@ -118,6 +167,14 @@ function updateEditInputFields() {
     editSecondsInput.value = formatTime(currentEditState.seconds);
 }
 
+const editInputs = document.querySelectorAll('#edit-container input[type="number"]');
+editInputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        setTimeout(() => {
+            input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300); // Wait for keyboard animation
+    });
+});
 
 window.addEventListener("load", () => {
     loadState();
@@ -136,6 +193,6 @@ if ('serviceWorker' in navigator) {
                 console.error('Service Worker registration failed:', error);
             });
     });
-}
+};
 
 
