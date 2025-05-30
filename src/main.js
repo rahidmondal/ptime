@@ -71,6 +71,7 @@ function formatTime(unit) {
 
 function updateTimerDisplay() {
     const timerState = getCurrentState();
+    const isRunning = isTimerRunning();
 
     const formattedHours = formatTime(timerState.hours);
     const formattedMinutes = formatTime(timerState.minutes);
@@ -79,14 +80,28 @@ function updateTimerDisplay() {
     const formattedTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
     timerDisplay.textContent = formattedTime;
 
+    const baseTitle = "PTime";
+    let newDocumentTitle = "";
+
+    if (isRunning) {
+        newDocumentTitle = `${formattedTime} - ${baseTitle}`;
+    } else {
+        if (timerState.pausedElapsed > 0 && !(timerState.hours === 0 && timerState.minutes === 0 && timerState.seconds === 0)) {
+            newDocumentTitle = `Paused | ${formattedTime} - ${baseTitle}`;
+        } else {
+            if (timerState.hours === 0 && timerState.minutes === 0 && timerState.seconds === 0) {
+                newDocumentTitle = baseTitle;
+            } else {
+                newDocumentTitle = `${formattedTime} - ${baseTitle}`;
+            }
+        }
+    }
+    document.title = newDocumentTitle;
 }
 
-// Replace your existing toggleFullscreen function with this:
 function toggleFullscreen() {
-    // Get the document element
     const doc = document.documentElement;
     
-    // Check if currently in fullscreen
     const isFullscreen = 
         document.fullscreenElement || 
         document.webkitFullscreenElement || 
@@ -174,6 +189,67 @@ editInputs.forEach(input => {
             input.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 300); // Wait for keyboard animation
     });
+});
+
+//KEYBOARD SHORTCUTS
+window.addEventListener('keydown', (event) => {
+    const activeElement = document.activeElement;
+    const isInputFocused = activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA');
+
+    if (!editContainer.classList.contains('hidden')) {
+        if (event.key === 'Enter') {
+            if (isInputFocused && (activeElement === editHoursInput || activeElement === editMinutesInput || activeElement === editSecondsInput)) {
+                event.preventDefault();
+                saveButton.click();
+            } else if (activeElement === saveButton) {
+                event.preventDefault();
+                saveButton.click();
+            }
+            return; 
+        } else if (event.key === 'Escape') {
+            event.preventDefault();
+            backFromEditButton.click(); 
+            return; 
+        }
+
+        if (isInputFocused) {
+            return;
+        }
+    }
+
+    switch (event.key.toLowerCase()) {
+        case 'e': 
+            event.preventDefault();
+            if (editContainer.classList.contains('hidden')) {
+                editButton.click();
+            } else {
+                backFromEditButton.click();
+            }
+            break;
+
+        case 's':
+            if (editContainer.classList.contains('hidden')) {
+                event.preventDefault();
+                if (!isTimerRunning()) { 
+                    toggleButton.click(); 
+                }
+            }
+            break;
+        case 'p':
+            if (editContainer.classList.contains('hidden')) {
+                event.preventDefault();
+                if (isTimerRunning()) { 
+                    toggleButton.click(); 
+                }
+            }
+            break;
+        case 'r':
+            if (editContainer.classList.contains('hidden')) {
+                event.preventDefault();
+                resetButton.click();
+            }
+            break;
+    }
 });
 
 window.addEventListener("load", () => {
