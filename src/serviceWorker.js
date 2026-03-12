@@ -1,5 +1,5 @@
-const CACHE_NAME = 'app-cache-v1';
-const DYNAMIC_CACHE = 'dynamic-cache-v1';
+const CACHE_NAME = 'app-cache-v2';
+const DYNAMIC_CACHE = 'dynamic-cache-v2';
 
 const FILES_TO_CACHE = [
   './index.html',

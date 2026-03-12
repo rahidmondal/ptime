@@ -8,18 +8,18 @@
   <meta name="description" content="Ptime - A simple and efficient timer application with offline support." />
   <meta name="keywords" content="timer, countdown, stopwatch, PWA, offline" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
   <script src="main.js" type="module"></script>
 
   <link rel="manifest" href="./manifest.json" />
-  <meta name="theme-color" content="#140729" />
+  <meta name="theme-color" content="#f4f7f6" id="meta-theme-color" />
   
   <link rel="icon" type="image/png" href="./Resource/logo192.png" sizes="192x192" />
   <meta name="apple-mobile-web-app-title" content="Ptime" />
-
-
-
 </head>
 
 <body>
@@ -29,43 +29,76 @@
       <img src="./Resource/logo192.png" class="logo-img" alt="PTime Logo">
       <span class="logo-text">PTime</span>
     </div>
-    <button id="fullscreen">⛶</button>
+    <div class="header-actions">
+      <button id="theme-toggle" aria-label="Toggle Theme">
+        <svg id="theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg id="theme-icon-sun" class="hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      </button>
+      <button id="install-app" class="hidden" aria-label="Install App">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span>Install</span>
+      </button>
+      <button id="fullscreen" aria-label="Toggle Fullscreen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      </button>
+    </div>
   </header>
 
   <main>
-    <div id="timer-container"  class="">
-      <div id="timer">00:59:59</div>
+    <div id="timer-container" class="">
+      <div class="timer-wrapper">
+        <div class="flip-clock" id="flip-clock">
+          <div class="flip-card" id="flip-hours" data-value="00">
+            <div class="flip-top"><span>00</span></div>
+            <div class="flip-bottom"><span>00</span></div>
+          </div>
+          <span class="flip-colon">:</span>
+          <div class="flip-card" id="flip-minutes" data-value="59">
+            <div class="flip-top"><span>59</span></div>
+            <div class="flip-bottom"><span>59</span></div>
+          </div>
+          <span class="flip-colon">:</span>
+          <div class="flip-card" id="flip-seconds" data-value="59">
+            <div class="flip-top"><span>59</span></div>
+            <div class="flip-bottom"><span>59</span></div>
+          </div>
+        </div>
+      </div>
 
       <div class="button-group">
-        <button id="toggle">Start</button>
-        <button id="edit">Edit Timer</button>
-        <button id="reset">Reset</button>
+        <button id="toggle" class="btn-primary">Start</button>
+        <button id="edit" class="btn-secondary">Edit Timer</button>
+        <button id="reset" class="btn-secondary">Reset</button>
       </div>
     </div>
 
    <div id="edit-container" class="hidden">
       <div class="edit-header">
         <button id="backFromEdit" aria-label="Back to timer">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-            <path d="M0 0h24v24H0V0z" fill="none"/>
-            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24px" height="24px">
+            <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
         </button>
         <h1>Edit Timer</h1>
       </div>
       <div class="edit-inputs-wrapper">
-        <input type="number" id="editHours" placeholder="00" value="00" max="23" min="0"/>
-        <input type="number" id="editMinutes" placeholder="59" value="59" max="59" min="0" />
-        <input type="number" id="editSeconds" placeholder="59" value="59" max="59" min="0" />
+        <div class="input-group">
+          <input type="number" id="editHours" placeholder="00" value="00" max="23" min="0"/>
+          <span class="input-label">h</span>
+        </div>
+        <div class="input-group">
+          <input type="number" id="editMinutes" placeholder="59" value="59" max="59" min="0" />
+          <span class="input-label">m</span>
+        </div>
+        <div class="input-group">
+          <input type="number" id="editSeconds" placeholder="59" value="59" max="59" min="0" />
+          <span class="input-label">s</span>
+        </div>
       </div>
-      <button id="save">Save</button>
+      <button id="save" class="btn-primary">Save Changes</button>
     </div>
-
-  
   </main>
 
   <audio id="alarm" src="./Resource/alarm.mp3" preload="auto"></audio>
 </body>
-
-
 </html>

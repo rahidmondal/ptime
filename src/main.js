@@ -1,14 +1,66 @@
 import { startTimer, pauseTimer, updateEditValue, resetTimer, getEditState, getCurrentState, isTimerRunning, loadState } from "./timer.js";
 
-
+// Theme & Settings Area
+const themeToggleButton = document.getElementById("theme-toggle");
+const themeIconMoon = document.getElementById("theme-icon-moon");
+const themeIconSun = document.getElementById("theme-icon-sun");
+const metaThemeColor = document.getElementById("meta-theme-color");
+const installAppButton = document.getElementById("install-app");
+let deferredPrompt;
 
 // Timer Area
-const timerDisplay = document.getElementById("timer");
 const toggleButton = document.getElementById("toggle");
 const editButton = document.getElementById("edit");
 const resetButton = document.getElementById("reset");
 const timerContainer = document.getElementById("timer-container");
 const toggleFullscreenButton = document.getElementById("fullscreen");
+
+function updateFlipCard(cardId, newValue) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    
+    const formattedValue = String(newValue).padStart(2, '0');
+    const currentValue = card.dataset.value || formattedValue;
+    
+    // First time init
+    if (!card.hasAttribute('data-value')) {
+        card.dataset.value = formattedValue;
+        card.querySelector('.flip-top span').textContent = formattedValue;
+        card.querySelector('.flip-bottom span').textContent = formattedValue;
+        return;
+    }
+
+    if (currentValue === formattedValue) return;
+
+    card.dataset.value = formattedValue;
+
+    const flipTopSpan = card.querySelector('.flip-top span');
+    const flipBottomSpan = card.querySelector('.flip-bottom span');
+
+    flipTopSpan.textContent = formattedValue;
+    flipBottomSpan.textContent = currentValue;
+
+    const flapTop = document.createElement('div');
+    flapTop.className = 'flap-top fall';
+    const flapTopSpan = document.createElement('span');
+    flapTopSpan.textContent = currentValue; 
+    flapTop.appendChild(flapTopSpan);
+
+    const flapBottom = document.createElement('div');
+    flapBottom.className = 'flap-bottom fall';
+    const flapBottomSpan = document.createElement('span');
+    flapBottomSpan.textContent = formattedValue; 
+    flapBottom.appendChild(flapBottomSpan);
+
+    card.appendChild(flapTop);
+    card.appendChild(flapBottom);
+
+    setTimeout(() => {
+        if (card.contains(flapTop)) card.removeChild(flapTop);
+        if (card.contains(flapBottom)) card.removeChild(flapBottom);
+        flipBottomSpan.textContent = formattedValue; 
+    }, 500);
+}
 
 
 
@@ -25,6 +77,65 @@ const backFromEditButton = document.getElementById("backFromEdit");
 
 
 
+
+// Theme Logic
+function applyTheme(theme) {
+    if (theme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        if(themeIconMoon) themeIconMoon.classList.add('hidden');
+        if(themeIconSun) themeIconSun.classList.remove('hidden');
+        if(metaThemeColor) metaThemeColor.setAttribute("content", "#101014");
+    } else {
+        document.body.removeAttribute('data-theme');
+        if(themeIconSun) themeIconSun.classList.add('hidden');
+        if(themeIconMoon) themeIconMoon.classList.remove('hidden');
+        if(metaThemeColor) metaThemeColor.setAttribute("content", "#f4f7f6");
+    }
+}
+
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+    }
+}
+
+if(themeToggleButton) {
+    themeToggleButton.addEventListener('click', () => {
+        const currentTheme = document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+}
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+    }
+});
+
+// PWA Install Logic
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if(installAppButton) installAppButton.classList.remove('hidden');
+});
+
+if(installAppButton) {
+    installAppButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+            installAppButton.classList.add('hidden');
+        }
+    });
+}
 
 // Full Screen
 toggleFullscreenButton.addEventListener("click",()=>{
@@ -77,8 +188,11 @@ function updateTimerDisplay() {
     const formattedMinutes = formatTime(timerState.minutes);
     const formattedSeconds = formatTime(timerState.seconds);
 
+    updateFlipCard("flip-hours", timerState.hours);
+    updateFlipCard("flip-minutes", timerState.minutes);
+    updateFlipCard("flip-seconds", timerState.seconds);
+
     const formattedTime = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-    timerDisplay.textContent = formattedTime;
 
     const baseTitle = "PTime";
     let newDocumentTitle = "";
@@ -256,6 +370,7 @@ window.addEventListener("load", () => {
     loadState();
     updateTimerDisplay();
     updateEditInputFields();
+    initTheme();
 });
 
 if ('serviceWorker' in navigator) {
